@@ -27,6 +27,7 @@ import PageLayout from '@/components/PageLayout';
 import ScrollableRow from '@/components/ScrollableRow';
 import { useSite } from '@/components/SiteProvider';
 import VideoCard from '@/components/VideoCard';
+import HttpWarningDialog from '@/components/HttpWarningDialog';
 
 function HomeClient() {
   const [activeTab, setActiveTab] = useState<'home' | 'favorites'>('home');
@@ -41,6 +42,7 @@ function HomeClient() {
   const { announcement } = useSite();
 
   const [showAnnouncement, setShowAnnouncement] = useState(false);
+  const [showHttpWarning, setShowHttpWarning] = useState(true);
 
   // 检查公告弹窗状态
   useEffect(() => {
@@ -506,6 +508,11 @@ function HomeClient() {
           )}
         </div>
       </div>
+
+      {/* HTTP 环境警告弹窗 */}
+      {showHttpWarning && (
+        <HttpWarningDialog onClose={() => setShowHttpWarning(false)} />
+      )}
 
       {/* 公告弹窗 */}
       {showAnnouncement && (
